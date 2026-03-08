@@ -1,0 +1,714 @@
+<!DOCTYPE html>
+<html lang="th">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gorrawit Puttabarramee | Certificates & Activities</title>
+    <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@400;700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --border-color: #111111;
+            --border-width: 4px;
+            --shadow-color: #111111;
+            --shadow-offset: 8px;
+            --bg-main: #f4f4f0;
+        }
+
+        body {
+            font-family: 'Prompt', sans-serif;
+            background-color: var(--bg-main);
+            color: var(--border-color);
+            margin: 0;
+            padding: 30px 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            overflow-x: hidden;
+        }
+
+        .content-wrapper {
+            max-width: 1200px;
+            width: 100%;
+            padding: 0 20px;
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .top-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .btn-github {
+            background: #ff90e8;
+            border: var(--border-width) solid var(--border-color);
+            padding: 10px 20px;
+            font-weight: 700;
+            font-size: 1.1rem;
+            text-decoration: none;
+            color: var(--border-color);
+            box-shadow: 4px 4px 0px var(--shadow-color);
+            transition: all 0.2s cubic-bezier(0.25, 0.8, 0.25, 1);
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .btn-github:hover {
+            transform: translate(-4px, -4px) scale(1.05);
+            box-shadow: 8px 8px 0px var(--shadow-color);
+            background: #ffd839;
+        }
+
+        .counter-box {
+            background: #fff;
+            border: var(--border-width) solid var(--border-color);
+            padding: 10px 25px;
+            font-weight: 700;
+            font-size: 1.1rem;
+            box-shadow: 4px 4px 0px var(--shadow-color);
+            display: flex;
+            gap: 15px;
+            transition: transform 0.2s ease;
+        }
+
+        .counter-box:hover {
+            transform: rotate(2deg);
+        }
+
+        .counter-box span {
+            background: #90b8ff;
+            padding: 2px 10px;
+            border: 2px solid var(--border-color);
+            border-radius: 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+            background: #ffffff;
+            padding: 20px 40px;
+            border: var(--border-width) solid var(--border-color);
+            box-shadow: var(--shadow-offset) var(--shadow-offset) 0px var(--shadow-color);
+            transform: rotate(-2deg);
+            transition: transform 0.3s ease;
+            max-width: 100%;
+        }
+
+        header:hover {
+            transform: rotate(0deg) scale(1.02);
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            font-weight: 900;
+            margin: 0;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            line-height: 1.2;
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin: 15px 0 0 0;
+            background: #ffd839;
+            display: inline-block;
+            padding: 5px 15px;
+            border: 2px solid var(--border-color);
+        }
+
+        .marquee-container {
+            width: 105vw;
+            background: #111;
+            color: #ffd839;
+            border-top: var(--border-width) solid var(--border-color);
+            border-bottom: var(--border-width) solid var(--border-color);
+            padding: 12px 0;
+            margin-bottom: 50px;
+            transform: rotate(1.5deg);
+            overflow: hidden;
+            white-space: nowrap;
+            display: flex;
+            box-shadow: 0px 8px 0px rgba(0, 0, 0, 0.2);
+            z-index: 10;
+        }
+
+        .marquee-content {
+            font-size: 1.5rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            display: flex;
+            animation: scrollText 15s linear infinite;
+        }
+
+        .marquee-content span {
+            padding: 0 30px;
+        }
+
+        @keyframes scrollText {
+            0% {
+                transform: translateX(0);
+            }
+
+            100% {
+                transform: translateX(-50%);
+            }
+        }
+
+        .filter-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            justify-content: center;
+            margin-bottom: 20px;
+            width: 100%;
+        }
+
+        .filter-btn {
+            background: #fff;
+            border: var(--border-width) solid var(--border-color);
+            padding: 8px 18px;
+            font-size: 1rem;
+            font-weight: 700;
+            font-family: 'Prompt', sans-serif;
+            cursor: pointer;
+            box-shadow: 4px 4px 0px var(--shadow-color);
+            transition: all 0.2s cubic-bezier(0.25, 0.8, 0.25, 1);
+            color: var(--border-color);
+        }
+
+        .filter-btn:hover {
+            transform: translate(-2px, -2px);
+            box-shadow: 6px 6px 0px var(--shadow-color);
+        }
+
+        .filter-btn.active[data-filter="all"] {
+            background: #ff90e8;
+            transform: translate(4px, 4px);
+            box-shadow: 0px 0px 0px var(--shadow-color);
+        }
+
+        .filter-btn.active[data-filter="set"] {
+            background: #ffd839;
+            transform: translate(4px, 4px);
+            box-shadow: 0px 0px 0px var(--shadow-color);
+        }
+
+        .filter-btn.active[data-filter="competition"] {
+            background: #23a094;
+            color: #fff;
+            transform: translate(4px, 4px);
+            box-shadow: 0px 0px 0px var(--shadow-color);
+        }
+
+        .filter-btn.active[data-filter="workshop"] {
+            background: #ff5e5e;
+            color: #fff;
+            transform: translate(4px, 4px);
+            box-shadow: 0px 0px 0px var(--shadow-color);
+        }
+
+        .filter-btn.active[data-filter="university"] {
+            background: #90b8ff;
+            transform: translate(4px, 4px);
+            box-shadow: 0px 0px 0px var(--shadow-color);
+        }
+
+        .hide {
+            display: none !important;
+        }
+
+        .section-title {
+            font-size: 2.2rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            margin: 50px 0 40px 0;
+            background: #23a094;
+            color: #fff;
+            padding: 10px 50px;
+            border: var(--border-width) solid var(--border-color);
+            box-shadow: 8px 8px 0px var(--shadow-color);
+            align-self: center;
+            text-align: center;
+            display: inline-block;
+            transition: transform 0.2s ease;
+        }
+
+        .section-title:hover {
+            transform: scale(1.05) rotate(-1deg);
+        }
+
+        .section-title.activities {
+            background: #ff5e5e;
+        }
+
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 40px;
+            width: 100%;
+        }
+
+        .card {
+            background-color: #ffffff;
+            border: var(--border-width) solid var(--border-color);
+            box-shadow: var(--shadow-offset) var(--shadow-offset) 0px var(--shadow-color);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+
+        .card:nth-child(even):hover {
+            transform: translate(-6px, -6px) rotate(2deg);
+            box-shadow: 14px 14px 0px var(--shadow-color);
+            z-index: 2;
+        }
+
+        .card:nth-child(odd):hover {
+            transform: translate(-6px, -6px) rotate(-2deg);
+            box-shadow: 14px 14px 0px var(--shadow-color);
+            z-index: 2;
+        }
+
+        .card:nth-child(3n+1) {
+            background-color: #ffd839;
+        }
+
+        .card:nth-child(3n+2) {
+            background-color: #90b8ff;
+        }
+
+        .card:nth-child(3n+3) {
+            background-color: #fff;
+        }
+
+        .img-wrapper {
+            width: 100%;
+            height: 250px;
+            overflow: hidden;
+            border-bottom: var(--border-width) solid var(--border-color);
+        }
+
+        .card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: grayscale(30%) contrast(120%);
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+            background: #ddd;
+        }
+
+        .card:hover img {
+            filter: grayscale(0%) contrast(100%);
+            transform: scale(1.1);
+        }
+
+        .card-content {
+            padding: 25px;
+            flex-grow: 1;
+        }
+
+        .card-content h2 {
+            font-size: 1.4rem;
+            font-weight: 900;
+            margin: 0 0 10px 0;
+            line-height: 1.3;
+        }
+
+        .host-text {
+            font-size: 1rem;
+            font-weight: 700;
+            color: #444;
+            background: #fff;
+            display: inline-block;
+            padding: 3px 10px;
+            border: 2px solid var(--border-color);
+            margin-bottom: 15px;
+            transition: transform 0.2s;
+        }
+
+        .card:hover .host-text {
+            transform: translateX(5px);
+            background: #111;
+            color: #fff;
+        }
+
+        .card-content p {
+            font-size: 1rem;
+            font-weight: 400;
+            line-height: 1.6;
+            margin: 0;
+            background: rgba(255, 255, 255, 0.7);
+            padding: 10px;
+            border: 2px solid var(--border-color);
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(244, 244, 240, 0.9);
+            backdrop-filter: blur(5px);
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            max-width: 90%;
+            max-height: 85vh;
+            border: var(--border-width) solid var(--border-color);
+            box-shadow: 16px 16px 0px var(--shadow-color);
+            background-color: #fff;
+            object-fit: contain;
+            animation: zoomIn 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 30px;
+            right: 40px;
+            color: var(--border-color);
+            font-size: 35px;
+            font-weight: 900;
+            cursor: pointer;
+            background: #ff90e8;
+            border: var(--border-width) solid var(--border-color);
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 6px 6px 0px var(--shadow-color);
+            transition: transform 0.1s ease, box-shadow 0.1s ease, background 0.2s ease;
+        }
+
+        .close-btn:hover {
+            transform: translate(3px, 3px) rotate(90deg);
+            box-shadow: 3px 3px 0px var(--shadow-color);
+            background: #ffd839;
+        }
+
+        @keyframes zoomIn {
+            from {
+                transform: scale(0.8) translateY(20px);
+                opacity: 0;
+            }
+
+            to {
+                transform: scale(1) translateY(0);
+                opacity: 1;
+            }
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 1.8rem;
+            }
+
+            .top-bar {
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="content-wrapper">
+        <div class="top-bar">
+            <a href="https://github.com/Ampsoria" target="_blank" class="btn-github">
+                <svg height="24" aria-hidden="true" viewBox="0 0 16 16" version="1.1" width="24"
+                    data-view-component="true">
+                    <path fill="currentColor"
+                        d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z">
+                    </path>
+                </svg>
+                My GitHub
+            </a>
+            <div class="counter-box">
+                Certificates: <span>8</span>
+                Activities: <span>10</span>
+            </div>
+        </div>
+
+        <header>
+            <h1>Gorrawit Puttabarramee<br>Archive</h1>
+            <p class="subtitle">Portfolio & Journey</p>
+        </header>
+    </div>
+
+    <div class="marquee-container">
+        <div class="marquee-content">
+            <span>🚀 SOFTWARE DEVELOPER</span>
+            <span>⚡ CYBERSECURITY ENTHUSIAST</span>
+            <span>🔥 TECH INNOVATOR</span>
+            <span>🚀 SOFTWARE DEVELOPER</span>
+            <span>⚡ CYBERSECURITY ENTHUSIAST</span>
+            <span>🔥 TECH INNOVATOR</span>
+        </div>
+    </div>
+
+    <div class="content-wrapper">
+        <div class="filter-container">
+            <button class="filter-btn active" data-filter="all">🌟 All</button>
+            <button class="filter-btn" data-filter="set">📈 SET Courses</button>
+            <button class="filter-btn" data-filter="competition">🏆 Competitions</button>
+            <button class="filter-btn" data-filter="workshop">💻 Workshops & Seminars</button>
+            <button class="filter-btn" data-filter="university">🏫 University Events</button>
+        </div>
+
+        <div class="section-title">Certificates</div>
+        <main class="grid-container" id="cert-container">
+
+            <article class="card" data-category="competition">
+                <div class="img-wrapper"><img src="image/Certificates1.jpg" alt="TESA Top Gun Rally 2025"></div>
+                <div class="card-content">
+                    <span class="host-text">Hosted by CRMA</span>
+                    <h2>TESA Top Gun Rally 2025</h2>
+                </div>
+            </article>
+
+            <article class="card" data-category="competition">
+                <div class="img-wrapper"><img src="image/Certificates2.jpg" alt="START UP THAILAND LEAGUE 2025"></div>
+                <div class="card-content">
+                    <span class="host-text">Hosted by NIA</span>
+                    <h2>START UP THAILAND LEAGUE 2025</h2>
+                </div>
+            </article>
+
+            <article class="card" data-category="workshop">
+                <div class="img-wrapper"><img src="image/Certificates3.jpg" alt="Introduction to Cyber Crime"></div>
+                <div class="card-content">
+                    <span class="host-text">By Great Learning</span>
+                    <h2>Introduction to Cyber Crime</h2>
+                </div>
+            </article>
+
+            <article class="card" data-category="set">
+                <div class="img-wrapper"><img src="image/Certificates4.jpg" alt="Business Model Canvas"></div>
+                <div class="card-content">
+                    <span class="host-text">By SET</span>
+                    <h2>Business Model Canvas</h2>
+                </div>
+            </article>
+
+            <article class="card" data-category="set">
+                <div class="img-wrapper"><img src="image/Certificates5.jpg" alt="Business Idea Discovery"></div>
+                <div class="card-content">
+                    <span class="host-text">By SET</span>
+                    <h2>Business Idea Discovery</h2>
+                </div>
+            </article>
+
+            <article class="card" data-category="set">
+                <div class="img-wrapper"><img src="image/Certificates6.jpg" alt="Pitching Technique"></div>
+                <div class="card-content">
+                    <span class="host-text">By SET</span>
+                    <h2>Pitching Technique</h2>
+                </div>
+            </article>
+
+            <article class="card" data-category="university">
+                <div class="img-wrapper"><img src="image/Certificates7.jpg" alt="Basic Data Management with Excel">
+                </div>
+                <div class="card-content">
+                    <span class="host-text">By Mahidol University</span>
+                    <h2>Basic Data Management with Excel</h2>
+                </div>
+            </article>
+
+            <article class="card" data-category="competition">
+                <div class="img-wrapper"><img src="image/Certificates8.jpg" alt="1st Place RoV University Tournament">
+                </div>
+                <div class="card-content">
+                    <span class="host-text">By Huachiew Chalermprakiet University</span>
+                    <h2>1st Place RoV University Tournament</h2>
+                </div>
+            </article>
+
+        </main>
+
+        <div class="section-title activities">Activities</div>
+        <main class="grid-container" id="activity-container">
+
+            <article class="card" data-category="competition">
+                <div class="img-wrapper">
+                    <img src="image/Activity10.jpg" alt="TESA Top Gun Rally 2025: Defense Innovation">
+                </div>
+                <div class="card-content">
+                    <h2>🏆 TESA Top Gun Rally 2025: Defense Innovation</h2>
+                    <p>Represented the university at TESA Top Gun Rally 2025, Thailand's premier embedded systems and
+                        software engineering competition. Collaborated with the team to design and develop technological
+                        solutions under the "Defense Innovation" theme, tackling complex engineering challenges under
+                        immense pressure.</p>
+                </div>
+            </article>
+
+            <article class="card" data-category="workshop">
+                <div class="img-wrapper"><img src="image/Activity1.jpg"
+                        alt="Software Project Initiation and Cost Estimation"></div>
+                <div class="card-content">
+                    <h2>Seminar : Software Project Initiation and Cost Estimation</h2>
+                    <p>Exploring the fundamentals of software engineering: A collaborative session on Software Project
+                        Initiation and Cost Estimation</p>
+                </div>
+            </article>
+
+            <article class="card" data-category="workshop">
+                <div class="img-wrapper"><img src="image/Activity2.jpg"
+                        alt="Business Transformation & Business Use Case (Bytedance)"></div>
+                <div class="card-content">
+                    <h2>Business Transformation & Business Use Case (Bytedance)</h2>
+                    <p>Wrapping up a great workshop focused on Business Transformation. Discussing various Business Use
+                        Cases helped us understand how to design better, value-driven software architectures.</p>
+                </div>
+            </article>
+
+            <article class="card" data-category="workshop">
+                <div class="img-wrapper"><img src="image/Activity3.jpg"
+                        alt="Data analytics and visualization by MS-Power BI and MS-Power Automate Workshop"></div>
+                <div class="card-content">
+                    <h2>Data analytics and visualization by MS-Power BI and MS-Power Automate Workshop (Samsonite)</h2>
+                    <p>Transforming raw data into actionable insights: A hands-on workshop on Data Analytics and
+                        Visualization using MS-Power BI and MS-Power Automate, featuring a real-world industry case
+                        study with Samsonite.</p>
+                </div>
+            </article>
+
+            <article class="card" data-category="university">
+                <div class="img-wrapper"><img src="image/Activity4.jpg" alt="HCU Open house 2025"></div>
+                <div class="card-content">
+                    <h2>HCU Open house 2025</h2>
+                    <p>Proud to be part of HCU Open House 2025. It was an amazing experience sharing our passion for
+                        technology, software engineering, and campus life with the next generation of students.</p>
+                </div>
+            </article>
+
+            <article class="card" data-category="university">
+                <div class="img-wrapper"><img src="image/Activity5.jpg" alt="Phadchimnithe 3"></div>
+                <div class="card-content">
+                    <h2>Phadchimnithe 3</h2>
+                    <p>Leveling up for the real world! Ready to transform from a fresh grad into a tech professional.
+                    </p>
+                </div>
+            </article>
+
+            <article class="card" data-category="university">
+                <div class="img-wrapper"><img src="image/Activity6.jpg" alt="Network Survey"></div>
+                <div class="card-content">
+                    <h2>Network Survey</h2>
+                    <p>A team presentation on our physical network exploration activity, detailing the hardware and
+                        connectivity setup of the campus building.</p>
+                </div>
+            </article>
+
+            <article class="card" data-category="workshop">
+                <div class="img-wrapper"><img src="image/Activity7.jpg" alt="Geospatial Analysis Workshop"></div>
+                <div class="card-content">
+                    <h2>Geospatial Analysis Workshop</h2>
+                    <p>Participated in a specialized session on Geospatial Analysis led by an AI Solution Hub Specialist
+                        from True Digital Group. Gained valuable insights into location-based data collection, spatial
+                        analysis techniques, and data visualization for business intelligence.</p>
+                </div>
+            </article>
+
+            <article class="card" data-category="workshop">
+                <div class="img-wrapper"><img src="image/Activity8.jpg"
+                        alt="ERP for Digital Business Development Workshop"></div>
+                <div class="card-content">
+                    <h2>ERP for Digital Business Development Workshop</h2>
+                    <p>Participated in a comprehensive lecture and hands-on workshop on Enterprise Resource Planning
+                        (ERP) systems, led by industry experts from Metro Systems Corporation. Gained practical insights
+                        into how ERP solutions streamline organizational resources and drive digital business
+                        transformation.</p>
+                </div>
+            </article>
+
+            <article class="card" data-category="workshop">
+                <div class="img-wrapper"><img src="image/Activity9.jpg" alt="Cyberbullying: Law and Ethics Perspective">
+                </div>
+                <div class="card-content">
+                    <h2>Cyberbullying: Law and Ethics Perspective</h2>
+                    <p>Participated in a special lecture focusing on the legal and ethical dimensions of cyberbullying.
+                        Understanding computer professional and social ethics is a crucial foundation for developing
+                        responsible and safe digital environments.</p>
+                </div>
+            </article>
+
+        </main>
+    </div>
+
+    <div id="imageModal" class="modal">
+        <span class="close-btn">&times;</span>
+        <img class="modal-content" id="expandedImg">
+    </div>
+
+    <script>
+        // ระบบ Modal
+        const modal = document.getElementById("imageModal");
+        const modalImg = document.getElementById("expandedImg");
+        const closeBtn = document.querySelector(".close-btn");
+        const images = document.querySelectorAll(".card img");
+
+        images.forEach(img => {
+            img.addEventListener("click", function () {
+                modal.style.display = "flex";
+                modalImg.src = this.src;
+            });
+        });
+
+        closeBtn.addEventListener("click", function () {
+            modal.style.display = "none";
+        });
+
+        modal.addEventListener("click", function (e) {
+            if (e.target === modal) {
+                modal.style.display = "none";
+            }
+        });
+
+        // ระบบ Filter
+        const filterBtns = document.querySelectorAll('.filter-btn');
+        const allCards = document.querySelectorAll('.card');
+
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                filterBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+
+                const filterValue = btn.getAttribute('data-filter');
+
+                allCards.forEach(card => {
+                    if (filterValue === 'all') {
+                        card.classList.remove('hide');
+                    } else {
+                        if (card.getAttribute('data-category') === filterValue) {
+                            card.classList.remove('hide');
+                        } else {
+                            card.classList.add('hide');
+                        }
+                    }
+                });
+            });
+        });
+    </script>
+
+</body>
+
+</html>
