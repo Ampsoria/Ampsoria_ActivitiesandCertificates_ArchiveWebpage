@@ -7,6 +7,11 @@
     <title>Gorrawit Puttabarramee | Certificates & Activities</title>
     <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@400;700;900&display=swap" rel="stylesheet">
     <style>
+        /* เปิดใช้งานการเลื่อนหน้าจอแบบนุ่มนวล (Smooth Scrolling) */
+        html {
+            scroll-behavior: smooth;
+        }
+
         :root {
             --border-color: #111111;
             --border-width: 4px;
@@ -165,7 +170,10 @@
             }
         }
 
-        .filter-container {
+        /* =========================================
+           ระบบปุ่มนำทาง (Scroll Navigation)
+           ========================================= */
+        .nav-container {
             display: flex;
             flex-wrap: wrap;
             gap: 15px;
@@ -174,60 +182,67 @@
             width: 100%;
         }
 
-        .filter-btn {
+        .nav-btn {
             background: #fff;
             border: var(--border-width) solid var(--border-color);
-            padding: 8px 18px;
-            font-size: 1rem;
-            font-weight: 700;
+            padding: 10px 20px;
+            font-size: 1.1rem;
+            font-weight: 900;
             font-family: 'Prompt', sans-serif;
+            text-transform: uppercase;
             cursor: pointer;
             box-shadow: 4px 4px 0px var(--shadow-color);
             transition: all 0.2s cubic-bezier(0.25, 0.8, 0.25, 1);
             color: var(--border-color);
+            text-decoration: none;
         }
 
-        .filter-btn:hover {
-            transform: translate(-2px, -2px);
-            box-shadow: 6px 6px 0px var(--shadow-color);
+        .nav-btn:hover {
+            transform: translate(-3px, -3px);
+            box-shadow: 7px 7px 0px var(--shadow-color);
         }
 
-        .filter-btn.active[data-filter="all"] {
-            background: #ff90e8;
-            transform: translate(4px, 4px);
-            box-shadow: 0px 0px 0px var(--shadow-color);
-        }
-
-        .filter-btn.active[data-filter="set"] {
+        .nav-btn.btn-comp {
             background: #ffd839;
-            transform: translate(4px, 4px);
-            box-shadow: 0px 0px 0px var(--shadow-color);
         }
 
-        .filter-btn.active[data-filter="competition"] {
-            background: #23a094;
-            color: #fff;
-            transform: translate(4px, 4px);
-            box-shadow: 0px 0px 0px var(--shadow-color);
-        }
-
-        .filter-btn.active[data-filter="workshop"] {
-            background: #ff5e5e;
-            color: #fff;
-            transform: translate(4px, 4px);
-            box-shadow: 0px 0px 0px var(--shadow-color);
-        }
-
-        .filter-btn.active[data-filter="university"] {
+        .nav-btn.btn-cert {
             background: #90b8ff;
-            transform: translate(4px, 4px);
-            box-shadow: 0px 0px 0px var(--shadow-color);
         }
 
-        .hide {
-            display: none !important;
+        .nav-btn.btn-act {
+            background: #ff90e8;
         }
 
+        /* ปุ่ม Back to Top */
+        .back-to-top {
+            display: inline-block;
+            margin: 40px auto 60px auto;
+            background: #111;
+            color: #fff;
+            border: var(--border-width) solid var(--border-color);
+            padding: 10px 30px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            font-family: 'Prompt', sans-serif;
+            cursor: pointer;
+            box-shadow: 4px 4px 0px #aaa;
+            transition: all 0.2s ease;
+            text-decoration: none;
+            text-transform: uppercase;
+            /* บังคับตัวพิมพ์ใหญ่ */
+            letter-spacing: 1px;
+        }
+
+        .back-to-top:hover {
+            transform: translateY(-5px);
+            box-shadow: 4px 9px 0px #aaa;
+            background: #23a094;
+        }
+
+        /* =========================================
+           หัวข้อแต่ละ Section
+           ========================================= */
         .section-title {
             font-size: 2.2rem;
             font-weight: 900;
@@ -242,14 +257,26 @@
             text-align: center;
             display: inline-block;
             transition: transform 0.2s ease;
+            scroll-margin-top: 30px;
         }
 
         .section-title:hover {
             transform: scale(1.05) rotate(-1deg);
         }
 
+        .section-title.competitions {
+            background: #ffd839;
+            color: var(--border-color);
+        }
+
+        .section-title.certificates {
+            background: #90b8ff;
+            color: var(--border-color);
+        }
+
         .section-title.activities {
-            background: #ff5e5e;
+            background: #ff90e8;
+            color: var(--border-color);
         }
 
         .grid-container {
@@ -259,6 +286,7 @@
             width: 100%;
         }
 
+        /* สไตล์การ์ด */
         .card {
             background-color: #ffffff;
             border: var(--border-width) solid var(--border-color);
@@ -355,6 +383,7 @@
             border: 2px solid var(--border-color);
         }
 
+        /* Modal */
         .modal {
             display: none;
             position: fixed;
@@ -428,7 +457,7 @@
     </style>
 </head>
 
-<body>
+<body id="top">
 
     <div class="content-wrapper">
         <div class="top-bar">
@@ -465,18 +494,30 @@
     </div>
 
     <div class="content-wrapper">
-        <div class="filter-container">
-            <button class="filter-btn active" data-filter="all">🌟 All</button>
-            <button class="filter-btn" data-filter="set">📈 SET Courses</button>
-            <button class="filter-btn" data-filter="competition">🏆 Competitions</button>
-            <button class="filter-btn" data-filter="workshop">💻 Workshops & Seminars</button>
-            <button class="filter-btn" data-filter="university">🏫 University Events</button>
+
+        <div class="nav-container">
+            <a href="#section-competitions" class="nav-btn btn-comp">🏆 Competition & Awards</a>
+            <a href="#section-certificates" class="nav-btn btn-cert">🎓 Certificates</a>
+            <a href="#section-activities" class="nav-btn btn-act">🚀 Activities</a>
         </div>
 
-        <div class="section-title">Certificates</div>
-        <main class="grid-container" id="cert-container">
 
-            <article class="card" data-category="competition">
+        <div id="section-competitions" class="section-title competitions">Competition & Awards</div>
+        <main class="grid-container">
+
+            <article class="card">
+                <div class="img-wrapper"><img src="image/Activity10.jpg"
+                        alt="TESA Top Gun Rally 2025: Defense Innovation"></div>
+                <div class="card-content">
+                    <h2>🏆 TESA Top Gun Rally 2025: Defense Innovation</h2>
+                    <p>Represented the university at TESA Top Gun Rally 2025, Thailand's premier embedded systems and
+                        software engineering competition. Collaborated with the team to design and develop technological
+                        solutions under the "Defense Innovation" theme, tackling complex engineering challenges under
+                        immense pressure.</p>
+                </div>
+            </article>
+
+            <article class="card">
                 <div class="img-wrapper"><img src="image/Certificates1.jpg" alt="TESA Top Gun Rally 2025"></div>
                 <div class="card-content">
                     <span class="host-text">Hosted by CRMA</span>
@@ -484,7 +525,7 @@
                 </div>
             </article>
 
-            <article class="card" data-category="competition">
+            <article class="card">
                 <div class="img-wrapper"><img src="image/Certificates2.jpg" alt="START UP THAILAND LEAGUE 2025"></div>
                 <div class="card-content">
                     <span class="host-text">Hosted by NIA</span>
@@ -492,48 +533,7 @@
                 </div>
             </article>
 
-            <article class="card" data-category="workshop">
-                <div class="img-wrapper"><img src="image/Certificates3.jpg" alt="Introduction to Cyber Crime"></div>
-                <div class="card-content">
-                    <span class="host-text">By Great Learning</span>
-                    <h2>Introduction to Cyber Crime</h2>
-                </div>
-            </article>
-
-            <article class="card" data-category="set">
-                <div class="img-wrapper"><img src="image/Certificates4.jpg" alt="Business Model Canvas"></div>
-                <div class="card-content">
-                    <span class="host-text">By SET</span>
-                    <h2>Business Model Canvas</h2>
-                </div>
-            </article>
-
-            <article class="card" data-category="set">
-                <div class="img-wrapper"><img src="image/Certificates5.jpg" alt="Business Idea Discovery"></div>
-                <div class="card-content">
-                    <span class="host-text">By SET</span>
-                    <h2>Business Idea Discovery</h2>
-                </div>
-            </article>
-
-            <article class="card" data-category="set">
-                <div class="img-wrapper"><img src="image/Certificates6.jpg" alt="Pitching Technique"></div>
-                <div class="card-content">
-                    <span class="host-text">By SET</span>
-                    <h2>Pitching Technique</h2>
-                </div>
-            </article>
-
-            <article class="card" data-category="university">
-                <div class="img-wrapper"><img src="image/Certificates7.jpg" alt="Basic Data Management with Excel">
-                </div>
-                <div class="card-content">
-                    <span class="host-text">By Mahidol University</span>
-                    <h2>Basic Data Management with Excel</h2>
-                </div>
-            </article>
-
-            <article class="card" data-category="competition">
+            <article class="card">
                 <div class="img-wrapper"><img src="image/Certificates8.jpg" alt="1st Place RoV University Tournament">
                 </div>
                 <div class="card-content">
@@ -544,23 +544,62 @@
 
         </main>
 
-        <div class="section-title activities">Activities</div>
-        <main class="grid-container" id="activity-container">
+        <a href="#top" class="back-to-top">⬆ BACK TO TOP</a>
 
-            <article class="card" data-category="competition">
-                <div class="img-wrapper">
-                    <img src="image/Activity10.jpg" alt="TESA Top Gun Rally 2025: Defense Innovation">
-                </div>
+
+        <div id="section-certificates" class="section-title certificates">Certificates</div>
+        <main class="grid-container">
+
+            <article class="card">
+                <div class="img-wrapper"><img src="image/Certificates3.jpg" alt="Introduction to Cyber Crime"></div>
                 <div class="card-content">
-                    <h2>🏆 TESA Top Gun Rally 2025: Defense Innovation</h2>
-                    <p>Represented the university at TESA Top Gun Rally 2025, Thailand's premier embedded systems and
-                        software engineering competition. Collaborated with the team to design and develop technological
-                        solutions under the "Defense Innovation" theme, tackling complex engineering challenges under
-                        immense pressure.</p>
+                    <span class="host-text">By Great Learning</span>
+                    <h2>Introduction to Cyber Crime</h2>
                 </div>
             </article>
 
-            <article class="card" data-category="workshop">
+            <article class="card">
+                <div class="img-wrapper"><img src="image/Certificates4.jpg" alt="Business Model Canvas"></div>
+                <div class="card-content">
+                    <span class="host-text">By SET</span>
+                    <h2>Business Model Canvas</h2>
+                </div>
+            </article>
+
+            <article class="card">
+                <div class="img-wrapper"><img src="image/Certificates5.jpg" alt="Business Idea Discovery"></div>
+                <div class="card-content">
+                    <span class="host-text">By SET</span>
+                    <h2>Business Idea Discovery</h2>
+                </div>
+            </article>
+
+            <article class="card">
+                <div class="img-wrapper"><img src="image/Certificates6.jpg" alt="Pitching Technique"></div>
+                <div class="card-content">
+                    <span class="host-text">By SET</span>
+                    <h2>Pitching Technique</h2>
+                </div>
+            </article>
+
+            <article class="card">
+                <div class="img-wrapper"><img src="image/Certificates7.jpg" alt="Basic Data Management with Excel">
+                </div>
+                <div class="card-content">
+                    <span class="host-text">By Mahidol University</span>
+                    <h2>Basic Data Management with Excel</h2>
+                </div>
+            </article>
+
+        </main>
+
+        <a href="#top" class="back-to-top">⬆ BACK TO TOP</a>
+
+
+        <div id="section-activities" class="section-title activities">Activities</div>
+        <main class="grid-container">
+
+            <article class="card">
                 <div class="img-wrapper"><img src="image/Activity1.jpg"
                         alt="Software Project Initiation and Cost Estimation"></div>
                 <div class="card-content">
@@ -570,7 +609,7 @@
                 </div>
             </article>
 
-            <article class="card" data-category="workshop">
+            <article class="card">
                 <div class="img-wrapper"><img src="image/Activity2.jpg"
                         alt="Business Transformation & Business Use Case (Bytedance)"></div>
                 <div class="card-content">
@@ -580,7 +619,7 @@
                 </div>
             </article>
 
-            <article class="card" data-category="workshop">
+            <article class="card">
                 <div class="img-wrapper"><img src="image/Activity3.jpg"
                         alt="Data analytics and visualization by MS-Power BI and MS-Power Automate Workshop"></div>
                 <div class="card-content">
@@ -591,7 +630,7 @@
                 </div>
             </article>
 
-            <article class="card" data-category="university">
+            <article class="card">
                 <div class="img-wrapper"><img src="image/Activity4.jpg" alt="HCU Open house 2025"></div>
                 <div class="card-content">
                     <h2>HCU Open house 2025</h2>
@@ -600,7 +639,7 @@
                 </div>
             </article>
 
-            <article class="card" data-category="university">
+            <article class="card">
                 <div class="img-wrapper"><img src="image/Activity5.jpg" alt="Phadchimnithe 3"></div>
                 <div class="card-content">
                     <h2>Phadchimnithe 3</h2>
@@ -609,7 +648,7 @@
                 </div>
             </article>
 
-            <article class="card" data-category="university">
+            <article class="card">
                 <div class="img-wrapper"><img src="image/Activity6.jpg" alt="Network Survey"></div>
                 <div class="card-content">
                     <h2>Network Survey</h2>
@@ -618,7 +657,7 @@
                 </div>
             </article>
 
-            <article class="card" data-category="workshop">
+            <article class="card">
                 <div class="img-wrapper"><img src="image/Activity7.jpg" alt="Geospatial Analysis Workshop"></div>
                 <div class="card-content">
                     <h2>Geospatial Analysis Workshop</h2>
@@ -628,7 +667,7 @@
                 </div>
             </article>
 
-            <article class="card" data-category="workshop">
+            <article class="card">
                 <div class="img-wrapper"><img src="image/Activity8.jpg"
                         alt="ERP for Digital Business Development Workshop"></div>
                 <div class="card-content">
@@ -640,7 +679,7 @@
                 </div>
             </article>
 
-            <article class="card" data-category="workshop">
+            <article class="card">
                 <div class="img-wrapper"><img src="image/Activity9.jpg" alt="Cyberbullying: Law and Ethics Perspective">
                 </div>
                 <div class="card-content">
@@ -652,6 +691,9 @@
             </article>
 
         </main>
+
+        <a href="#top" class="back-to-top">⬆ BACK TO TOP</a>
+
     </div>
 
     <div id="imageModal" class="modal">
@@ -660,7 +702,7 @@
     </div>
 
     <script>
-        // ระบบ Modal
+        // ระบบ Modal ขยายรูป
         const modal = document.getElementById("imageModal");
         const modalImg = document.getElementById("expandedImg");
         const closeBtn = document.querySelector(".close-btn");
@@ -681,31 +723,6 @@
             if (e.target === modal) {
                 modal.style.display = "none";
             }
-        });
-
-        // ระบบ Filter
-        const filterBtns = document.querySelectorAll('.filter-btn');
-        const allCards = document.querySelectorAll('.card');
-
-        filterBtns.forEach(btn => {
-            btn.addEventListener('click', () => {
-                filterBtns.forEach(b => b.classList.remove('active'));
-                btn.classList.add('active');
-
-                const filterValue = btn.getAttribute('data-filter');
-
-                allCards.forEach(card => {
-                    if (filterValue === 'all') {
-                        card.classList.remove('hide');
-                    } else {
-                        if (card.getAttribute('data-category') === filterValue) {
-                            card.classList.remove('hide');
-                        } else {
-                            card.classList.add('hide');
-                        }
-                    }
-                });
-            });
         });
     </script>
 
