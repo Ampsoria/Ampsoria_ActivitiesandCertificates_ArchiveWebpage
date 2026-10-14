@@ -18,7 +18,8 @@ also contain certificates; categories count gallery entries, not document types.
 - Heart/save memories in this browser, with a dedicated Saved filter.
 - Keyboard-accessible image dialog with previous/next, zoom, original image links,
   and copyable links to individual memories.
-- Light/dark themes, gentle sakura petals, and a switch to pause decorative motion.
+- Light mode by default, with a saved light/dark choice taking precedence; gentle
+  sakura petals and a switch to pause decorative motion.
 - A tiny anime companion with rotating encouraging notes and a reading-progress bar.
 - System reduced-motion support, labeled controls, visible keyboard focus, a skip
   link, and usable images/stories even when JavaScript is disabled.

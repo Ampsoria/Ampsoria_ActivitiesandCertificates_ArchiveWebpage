@@ -256,7 +256,6 @@ window.addEventListener("hashchange", () => {
   if (location.hash.startsWith("#memory-")) openMemory(location.hash.slice(1));
   else if (dialog.open) dialog.close();
 });
-const darkQuery = matchMedia("(prefers-color-scheme: dark)");
 let themePreference = storage.get("amp-gallery-theme", null);
 function applyTheme(theme) {
   root.dataset.theme = theme;
@@ -265,20 +264,12 @@ function applyTheme(theme) {
   $('meta[name="theme-color"]').content =
     theme === "dark" ? "#201720" : "#fff9fb";
 }
-applyTheme(
-  ["light", "dark"].includes(themePreference)
-    ? themePreference
-    : darkQuery.matches
-      ? "dark"
-      : "light",
-);
+// First visit defaults to light; an explicit saved choice takes precedence.
+applyTheme(["light", "dark"].includes(themePreference) ? themePreference : "light");
 $("#theme-toggle").addEventListener("click", () => {
   themePreference = root.dataset.theme === "dark" ? "light" : "dark";
   storage.set("amp-gallery-theme", themePreference);
   applyTheme(themePreference);
-});
-darkQuery.addEventListener("change", (e) => {
-  if (!themePreference) applyTheme(e.matches ? "dark" : "light");
 });
 const reducedMotion = matchMedia("(prefers-reduced-motion: reduce)");
 let effectsPreference = storage.get("amp-gallery-effects", true);
