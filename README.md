@@ -1,30 +1,54 @@
-# 🌟 Gorrawit Puttabarramee | Certificates & Activities 🏆
+# 🌸 Amp's little gallery
 
-Welcome to the **Gorrawit Puttabarramee Archive**! 🚀 This repository contains a beautiful, responsive portfolio website built to showcase my certificates, activities, and journey as a Software Developer, Cybersecurity Enthusiast, and Tech Innovator. ✨
+A sakura-themed portfolio for **Gorrawit Puttabarramee**, matching the pink palette,
+rounded typography, and original anime companion on [my GitHub profile](https://github.com/Ampsoria).
 
-## 🚀 Features
-- 🎨 **Modern UI/UX**: A visually appealing and playful design with engaging hover effects and animations.
-- 🗂️ **Dynamic Filtering**: Easily sort through certificates and activities by categories like SET Courses, Competitions, Workshops, and University Events.
-- 🖼️ **Image Viewer Modal**: Click on any certificate or activity image to view it in full size.
-- 📱 **Fully Responsive**: Looks beautifully on both desktop and mobile devices!
+[Explore the live gallery](https://ampsoria.github.io/Ampsoria_ActivitiesandCertificates_ArchiveWebpage/)
 
-## 🛠️ Built With
-- **HTML5** 🏗️
-- **CSS3 (Vanilla)** 💅
-- **JavaScript (Vanilla)** ⚡
+## The collection
 
-## 📸 Demo
+All 18 original images and their descriptions are preserved: 4 competition/award
+entries, 5 learning certificates, and 9 activity entries. Some competition entries
+also contain certificates; categories count gallery entries, not document types.
 
-Here is a glimpse of the portfolio website in action! 👇
+## Features
 
-### 🌟 Main View
-![Demo Screenshot 1](./Demo/Screenshot%202026-03-08%20230436.png)
+- Spotlight for TESA Top Gun Rally 2025 and a responsive photo collection.
+- Search across titles, hosts, and stories; category filters and alphabetical sorting.
+- Heart/save memories in this browser, with a dedicated Saved filter.
+- Keyboard-accessible image dialog with previous/next, zoom, original image links,
+  and copyable links to individual memories.
+- Light/dark themes, gentle sakura petals, and a switch to pause decorative motion.
+- A tiny anime companion with rotating encouraging notes and a reading-progress bar.
+- System reduced-motion support, labeled controls, visible keyboard focus, a skip
+  link, and usable images/stories even when JavaScript is disabled.
 
-### 🪄 Activities & Certificates
-![Demo Screenshot 2](./Demo/Screenshot%202026-03-08%20230447.png)
+## Run locally
 
-## 🤝 Connect with Me
-- 🐙 [Check out my GitHub](https://github.com/Ampsoria)
+No dependencies or build step. From this directory:
 
----
-*Keep Building, Keep Learning!* 💻🔥
+```sh
+python3 -m http.server 8766 --bind 127.0.0.1
+```
+
+Open `http://127.0.0.1:8766`. GitHub Pages serves the same static files.
+
+## Maintain
+
+- `index.html`: original collection content, featured story, and semantic structure.
+- `styles.css`: responsive layout, theme colors, and motion.
+- `app.js`: progressive enhancements; no backend, analytics, or third-party scripts.
+- `image/`: original photos and certificates, unchanged.
+- `assets/`: local Nunito variable font (SIL OFL; see `assets/OFL.txt`), sakura icon,
+  and the original AI-generated male mascot reused from the profile repository.
+- `Demo/`: screenshots of the previous design, kept as historical assets.
+
+To add an entry, duplicate a `.memory-card`, give it a unique `memory-*` ID, and
+set `data-category` to `competitions`, `certificates`, or `activities`. Update the
+static count labels for the no-JavaScript fallback; JavaScript recalculates them
+from the actual cards. Keep descriptions in `.story p` and hosts in `.host`.
+
+Saved items and appearance preferences use local storage only. They do not sync
+between devices; if storage is unavailable, saving works for the current visit.
+The image viewer supports `←`, `→`, and `Esc`; `/` focuses search outside the viewer.
+Share links use `#memory-...` and reopen that entry on load.
